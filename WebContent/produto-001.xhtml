@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+	<ui:composition template="/index.xhtml">
+		<ui:define name="container">
+			<h1>Uso Atributo ValueChangeListener</h1>
+			<h:form id="frmVCL">
+				<fieldset>
+					<legend>Produto</legend>
+						<h:panelGrid columns="2">
+							<h:outputLabel value="Preço:" for="campo-preco" />
+							<h:inputText valueChangeListener="#{produto001Bean.mudarPreco}" id="campo-preco">
+								<f:convertNumber locale="pt_BR" minFractionDigits="0" maxFractionDigits="2" pattern="#,##0.00;(#,##0.00)"/>
+							</h:inputText>
+							<h:outputLabel value="Opção:" for="campo-opcao" />
+							<h:selectOneRadio valueChangeListener="#{produto001Bean.mudaOpcaoMarcada}" id="campo-opcao" onchange="submit()">
+								<f:selectItem itemLabel="Item-1" itemValue="0001"/>
+								<f:selectItem itemLabel="Item-2" itemValue="0002"/>
+								<f:selectItem itemLabel="Item-3" itemValue="0003"/>
+								<f:selectItem itemLabel="Item-4" itemValue="0004"/>
+							</h:selectOneRadio>	
+							
+							<h:outputLabel value="Paises" />
+							<h:selectOneMenu value="#{produto001Bean.localeCode}" valueChangeListener="#{produto001Bean.codigoDoPaisModificado}" onchange="submit()">
+								<f:selectItem noSelectionOption="true" itemLabel="Clique aqui..." itemValue="#{null}"/>
+								<f:selectItems value="#{produto001Bean.paises}"
+									
+								/>
+							</h:selectOneMenu>
+						</h:panelGrid>
+				</fieldset>
+				<ul>
+					<li>Preço Antigo: #{produto001Bean.precoAntigo}</li>
+					<li>Preço Novo: #{produto001Bean.precoNovo}</li>
+					<li>Opção Anterior Selecionada: #{produto001Bean.opcaoOld}</li>
+					<li>Opção Atual Selecionada: #{produto001Bean.opcaoNew}</li>
+					<li>Localidade do País Selecionado: #{produto001Bean.localeCode}</li>
+				</ul>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</html>
