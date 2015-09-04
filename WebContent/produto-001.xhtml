@@ -12,7 +12,7 @@
 					<legend>Produto</legend>
 						<h:panelGrid columns="2">
 							<h:outputLabel value="Preço:" for="campo-preco" />
-							<h:inputText valueChangeListener="#{produto001Bean.mudarPreco}" id="campo-preco">
+							<h:inputText valueChangeListener="#{produto001Bean.mudarPreco}" id="campo-preco" onchange="submit()">
 								<f:convertNumber locale="pt_BR" minFractionDigits="0" maxFractionDigits="2" pattern="#,##0.00;(#,##0.00)"/>
 							</h:inputText>
 							<h:outputLabel value="Opção:" for="campo-opcao" />
@@ -26,18 +26,18 @@
 							<h:outputLabel value="Paises" />
 							<h:selectOneMenu value="#{produto001Bean.localeCode}" valueChangeListener="#{produto001Bean.codigoDoPaisModificado}" onchange="submit()">
 								<f:selectItem noSelectionOption="true" itemLabel="Clique aqui..." itemValue="#{null}"/>
-								<f:selectItems value="#{produto001Bean.paises}"
-									
-								/>
+								<f:selectItems value="#{produto001Bean.paises}"/>
 							</h:selectOneMenu>
 						</h:panelGrid>
 				</fieldset>
 				<ul>
-					<li>Preço Antigo: #{produto001Bean.precoAntigo}</li>
-					<li>Preço Novo: #{produto001Bean.precoNovo}</li>
-					<li>Opção Anterior Selecionada: #{produto001Bean.opcaoOld}</li>
-					<li>Opção Atual Selecionada: #{produto001Bean.opcaoNew}</li>
-					<li>Localidade do País Selecionado: #{produto001Bean.localeCode}</li>
+					<li>Preço Antigo:<h:outputText value="#{produto001Bean.precoAntigo}" id="precoAntigo"/></li>
+					<li>Preço Novo:<h:outputText value="#{produto001Bean.precoNovo}" id="precoNovo"/></li>
+					<ul>
+						<li>Opção Anterior Selecionada:<h:outputText value="#{produto001Bean.opcaoOld}" id="opcAnterior"/></li>
+						<li>Opção Atual Selecionada:<h:outputLabel value="#{produto001Bean.opcaoNew}" id="opcProxima"/></li>
+					</ul>
+					<li>Localidade do País Selecionado:<h:outputText id="Itenspais" value="#{produto001Bean.localeCode}"/> </li>
 				</ul>
 			</h:form>
 		</ui:define>
