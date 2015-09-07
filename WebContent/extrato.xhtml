@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:composition template="/index.xhtml">
+	<ui:define name="container">
+		<h1>Validando Datas com SystemEvent</h1>
+		<h:form id="frmExtrato">
+			<f:event listener="#{extratoBean.validaDatas}" type="postValidate" />
+			<fieldset>
+				<legend>Data de Extrato</legend>
+				<h:panelGrid columns="2">
+					<h:outputLabel value="Data inicial:" for="data-inicial" />
+					<h:inputText value="#{extratoBean.extrato.dataInicial}"
+						id="data-inicial" required="true" size="10" maxlength="10"
+						requiredMessage="Data inicial não pode ser nula.">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:inputText>
+
+					<h:outputLabel value="Data final:" for="data-final" />
+					<h:inputText value="#{extratoBean.extrato.dataFinal}"
+						id="data-final" required="true" size="10" maxlength="10"
+						requiredMessage="Data final não pode ser nula.">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:inputText>
+				</h:panelGrid>
+				<h:commandButton action="#{extratoBean.geraExtrato()}"
+					value="Gerar extrado" />
+			</fieldset>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

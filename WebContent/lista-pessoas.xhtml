@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<ui:composition template="/index.xhtml">
+	<ui:define name="container">
+		<h:form id="frmTable">
+			<h:panelGroup rendered="#{not empty cadastroBean.pessoas}">
+				<fieldset>
+					<legend>Lista de Pessoas</legend>
+					<h:dataTable border="1" value="#{cadastroBean.pessoas}"
+						var="pessoa" rendered="#{not empty cadastroBean.pessoas}"
+						styleClass="tableField" rowClasses="tableOddRow,tableEvenRow"
+						headerClass="tableHeader">
+
+						<f:facet name="header">Lista de Pessoas por Estado</f:facet>
+						<h:column>
+							<f:facet name="header">Nome</f:facet>
+								#{pessoa.nome}
+						</h:column>
+						
+						<h:column>
+							<f:facet name="header">Estado</f:facet>
+								#{pessoa.estado.nome}
+						</h:column>
+
+						<h:column>
+							<f:facet name="header">Cidade</f:facet>
+								#{pessoa.cidade}
+						</h:column>
+					</h:dataTable>
+				</fieldset>
+			</h:panelGroup>
+			<h:commandButton action="#{cadastroBean.voltar}" value="Voltar" />
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

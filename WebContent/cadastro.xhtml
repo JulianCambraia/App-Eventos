@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+	<ui:composition template="/index.xhtml">
+		<ui:define name="container">
+			<h:form id="frmCadastro">
+				<fieldset>
+					<legend>Cadastro pessoa</legend>
+					<h:panelGrid columns="2">
+						<h:outputLabel value="Nome:" for="nome" />
+						<h:inputText value="#{cadastroBean.pessoa.nome}" id="nome" required="true" requiredMessage="Nome é de preenchimento obrigatório." size="60" maxlength="100"/>
+						
+						<h:outputLabel value="Estado:" for="estado" />
+						<h:selectOneMenu value="#{cadastroBean.estadoSelecionado.siglaDoEstadoEscolhido}" id="estado"
+							valueChangeListener="#{cadastroBean.mudaEstado}"
+							onchange="submit()"
+							required="true" 
+							requiredMessage="Estado é de preenchimento obrigatório."
+							immediate="true"
+							>
+							
+							<f:selectItem noSelectionOption="true" itemLabel="Escolha um estado"/>
+							<f:selectItems
+								value="#{cadastroBean.estados}" 
+								var="estado"
+								itemLabel="#{estado.nome}" 
+								itemValue="#{estado.sigla}"
+							/>
+						</h:selectOneMenu>
+						
+						<h:outputLabel value="Cidade:" for="cidade" />
+						<h:selectOneMenu value="#{cadastroBean.cidade.cidadeSelecionada}" id="cidade" required="true" requiredMessage="Cidade é de preenchimento obrigatório.">
+							<f:selectItem itemLabel="Escolha uma cidade" noSelectionOption="true"/>
+							<f:selectItems value="#{cadastroBean.estadoSelecionado.cidades}" var="cidade"/>
+						</h:selectOneMenu>
+						
+					</h:panelGrid>	
+					<h:commandButton action="#{cadastroBean.cadastrar}" value="Cadastrar" />
+				</fieldset>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</html>
